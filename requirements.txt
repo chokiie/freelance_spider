@@ -1,0 +1,16 @@
+requests
+beautifulsoup4
+httpx
+fake_useragent
+python-dotenv
+boto3
+pytz
+google-api-python-client
+oauth2client
+gspread
+aiohttp
+html2text
+fastapi
+uvicorn
+tenacity
+openai

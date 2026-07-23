@@ -1,0 +1,8 @@
+{
+    "www.vietnamworks.com":
+    {
+        "country":"vietnam",
+        "module":"download.vietnam.vietnamworks_com",
+        "class":"VietnamworksComDownloadStrategy"
+    }
+}

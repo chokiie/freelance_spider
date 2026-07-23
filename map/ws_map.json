@@ -1,0 +1,8 @@
+{
+    "www.vietnamworks.com":
+    {
+        "country":"vietnam",
+        "module":"website.vietnam.vietnamworks_com",
+        "class":"VietnamworksComWebsiteStrategy"
+    }
+}
