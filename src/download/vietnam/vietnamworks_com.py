@@ -1,5 +1,12 @@
-from src.core.imports import *
+from core.imports import *
+from core.logger import logger
 
+from core.config import (
+    REQUEST_TIMEOUT,
+    MAX_CATEGORY_THREADS,
+    MAX_WEBSITE_THREADS,
+    MAX_ITEMS_PER_CATEGORY
+)
 class VietnamworksComDownloadStrategy():
     def __init__(self, website, country, url):
             self.name = "Vietnamworks"
@@ -31,21 +38,26 @@ class VietnamworksComDownloadStrategy():
                 headers = {
                     "user-agent": UserAgent().random,
                 }
-                res = requests.get(base_url, headers=headers)
-                return res.cookies.get_dict()
+                response = requests.get(base_url,headers=headers,timeout=REQUEST_TIMEOUT)
+                return response.cookies.get_dict()
             except Exception as e:
                 logger.error(f"Error in get_cookies: {e}")
                 return {}
 
     def getRequester(self, url):
-        logging.info(f"Fetching Base URL: {url}")
+
+        logger.info("Fetching Base URL: %s",url)
+
         headers = self.init_headers()
-        response = requests.get(url, headers=headers, timeout=30)
+        response = requests.get(url,headers=headers,timeout=REQUEST_TIMEOUT)
+
         if response.status_code != 200:
-            logging.warning(f"Failed to fetch {url}, status code: {response.status_code}")
+
+            logger.warning("Failed to fetch %s, status code: %s",url,response.status_code)
+
             return None
-        else:
-            return response.text
+
+        return response.text
 
     def fetch_api_content(self,query,page,category_name="",category_url=""):
             #Data in API
@@ -69,7 +81,7 @@ class VietnamworksComDownloadStrategy():
     
             headers = self.init_headers()
 
-            response = requests.post(api_url,json=payload, headers=headers, timeout=30)
+            response = requests.post(api_url,json=payload, headers=headers, timeout=REQUEST_TIMEOUT)
             if response.status_code == 200:
                 return response.json()
 
@@ -84,20 +96,22 @@ class VietnamworksComDownloadStrategy():
             return None
 
     def parse_items(self, data_list):
-            try:
-                # sample data_list: [{'url': 'https://example.com', 'response': 'raw HTML response from the website'}]
-                #data_list = [data for data in data_list if data.get('response') is not None]
-                logger.info('Starting processing with %d threads', len(data_list))
-                
-                # Use ThreadPoolExecutor instead of multiprocessing.Pool
-                with ThreadPoolExecutor(max_workers=min(len(data_list), 5)) as executor:
-                    results = list(executor.map(self.get_items, data_list))
-                
-                #logger.info('Processing complete')
-                return results
-            except Exception as e:
-                logger.error('Error in processor multi_process: %s', e)
-                return []
+
+        try:
+
+            logger.info("Starting processing with %d threads",min(len(data_list), MAX_WEBSITE_THREADS))
+
+            with ThreadPoolExecutor(max_workers=min(len(data_list),MAX_WEBSITE_THREADS)) as executor:
+
+                results = list(executor.map(self.get_items,data_list))
+
+            return results
+
+        except Exception:
+
+            logger.exception("Error while processing items.")
+
+            return []
             
     def get_category_urls(self):
         data = []  # store all Category Name and Category URLs here
@@ -105,13 +119,9 @@ class VietnamworksComDownloadStrategy():
             response = self.getRequester(self.url)
             try:
                 _data = json.loads(response)
-                # raw_data is now a Python dict/list
-                #logger.info("Raw data is JSON.")
             except (json.JSONDecodeError, TypeError):
                 _data = BeautifulSoup(response, "html.parser")
-                # Not valid JSON, so parse as HTML
-                #logger.info("Raw data is HTML.")
-            
+
             category_list = []
             
             if 'data' in _data:
@@ -142,7 +152,9 @@ class VietnamworksComDownloadStrategy():
             return data
 
         except Exception as e:
-            logging.error(f"Unexpected error in get_urls(): {e}")
+            logger.exception(
+                "Unexpected error in get_category_urls()"
+            )
             return data  # return whatever URLs were collected
 
     def get_category_product_urls(self, category):
@@ -150,11 +162,7 @@ class VietnamworksComDownloadStrategy():
         category_name = category["name"]
         category_url = category["url"]
 
-        #logger.info("START CATEGORY : %s", category_name)
-        #logger.info("URL            : %s", category_url)
-
         results = []
-        MAX_ITEMS_PER_CATEGORY = 50
 
         try:
 
@@ -284,16 +292,27 @@ class VietnamworksComDownloadStrategy():
     def get_product_urls(self, category_data):
 
         if not category_data:
-            return []
+            logger.warning("No categories found.")
+
+            return {
+                "products": [],
+                "failed_categories": []
+            }
 
         logger.info(
             "Processing %d categories using %d threads",
             len(category_data),
-            min(len(category_data), 5)
+            min(
+                len(category_data),
+                MAX_CATEGORY_THREADS
+            )
         )
 
         with ThreadPoolExecutor(
-            max_workers=min(len(category_data), 5)
+            max_workers=min(
+                len(category_data),
+                MAX_CATEGORY_THREADS
+            )
         ) as executor:
 
             results = list(

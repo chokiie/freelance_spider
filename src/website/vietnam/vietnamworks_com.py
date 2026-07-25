@@ -1,6 +1,11 @@
-from src.core.imports import *
-
-
+from core.imports import *
+from core.logger import logger
+from core.config import (
+    REQUEST_TIMEOUT,
+    MAX_CATEGORY_THREADS,
+    MAX_WEBSITE_THREADS,
+    MAX_ITEMS_PER_CATEGORY
+)
 class VietnamworksComWebsiteStrategy:
 
     def __init__(self, website, country, url):
@@ -22,8 +27,10 @@ class VietnamworksComWebsiteStrategy:
             )
 
             with ThreadPoolExecutor(
-                max_workers=min(len(data_list), 5)
-            ) as executor:
+                max_workers=min(
+                    len(data_list),
+                    MAX_WEBSITE_THREADS
+            )) as executor:
 
                 results = list(
                     executor.map(

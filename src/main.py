@@ -1,11 +1,8 @@
-from src.core.imports import *
-from src.core.processor import Processor
-from exporter.json_exporter import JsonExporter
+from core.imports import *
+from core.logger import logger
+from core.processor import Processor
 
-logging.basicConfig(
-    level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
-)
+from exporter.json_exporter import JsonExporter
 
 def run(static_data):
 

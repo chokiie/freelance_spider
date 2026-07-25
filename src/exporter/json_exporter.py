@@ -1,24 +1,33 @@
 from src.core.imports import *
 
+from src.core.logger import logger
+from src.core.config import (
+    OUTPUT_FOLDER,
+    JSON_INDENT,
+    JSON_ENSURE_ASCII,
+    DEFAULT_JSON_FILENAME,
+    DEFAULT_ENCODING,
+    DATE_FORMAT
+)
+
 
 class JsonExporter:
 
     def save(self, jobs, static_data):
 
         country = static_data["country"]
-        website = static_data["website"]
-
-        date = datetime.now().strftime("%Y-%m-%d")
 
         website = (
-            website
+            static_data["website"]
             .replace("www.", "")
             .replace(".com", "")
             .replace(".", "_")
         )
 
+        date = datetime.now().strftime(DATE_FORMAT)
+
         output_path = os.path.join(
-            "output",
+            OUTPUT_FOLDER,
             country,
             website,
             date
@@ -31,20 +40,20 @@ class JsonExporter:
 
         file_path = os.path.join(
             output_path,
-            "jobs.json"
+            DEFAULT_JSON_FILENAME
         )
 
         with open(
             file_path,
             "w",
-            encoding="utf-8"
+            encoding=DEFAULT_ENCODING
         ) as f:
 
             json.dump(
                 jobs,
                 f,
-                indent=4,
-                ensure_ascii=False
+                indent=JSON_INDENT,
+                ensure_ascii=JSON_ENSURE_ASCII
             )
 
         logger.info(

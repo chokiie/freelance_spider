@@ -1,7 +1,5 @@
-
-from src.core.imports import *
-
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
+from core.imports import *
+from core.logger import logger
 
 class Processor:
     def __init__(self):
@@ -30,7 +28,7 @@ class Processor:
             url=listing_data['url'],
         )
 
-        logging.info("Running LISTING spider")
+        logger.info("Running LISTING spider")
         return spider.get_category_urls()
 
     def run_listing_products(self, listing_data, category_data):
@@ -51,7 +49,7 @@ class Processor:
             url=listing_data["url"],
         )
 
-        logging.info("Running PRODUCT URL spider")
+        logger.info("Running PRODUCT URL spider")
 
         return spider.get_product_urls(category_data)
 
