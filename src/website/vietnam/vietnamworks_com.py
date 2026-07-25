@@ -1,4 +1,4 @@
-from imports import *
+from src.core.imports import *
 
 
 class VietnamworksComWebsiteStrategy:

@@ -4,3 +4,11 @@ __pycache__/
 credentials.json
 .env
 .vscode/
+output/
+careerviet.py
+joboko.py
+itviec.py
+test.py
+topcv.py
+topdev.py
+vietnamnworks.py

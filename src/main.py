@@ -1,6 +1,6 @@
-from imports import *
-from processor import Processor
-from utils import Helper
+from src.core.imports import *
+from src.core.processor import Processor
+from exporter.json_exporter import JsonExporter
 
 logging.basicConfig(
     level=logging.INFO,
@@ -10,7 +10,6 @@ logging.basicConfig(
 def run(static_data):
 
     processor = Processor()
-    helper = Helper()
 
     # --------------------------
     # Stage 1
@@ -46,17 +45,11 @@ def run(static_data):
 
     logger.info("Items Parsed : %d", len(items))
 
-    success = helper.save_to_google_sheet(
-        data=items,
-        scraper_name=static_data["website"]
+    JsonExporter().save(
+        jobs=items,
+        static_data=static_data
     )
-
-    if success:
-        logger.info("Google Sheet updated successfully.")
-    else:
-        logger.error("Google Sheet update failed.")
-
-
+    
 if __name__ == "__main__":
 
     static_data = {

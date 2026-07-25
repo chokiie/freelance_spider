@@ -19,6 +19,7 @@ import urllib.parse
 import zlib
 import csv
 import threading
+from pathlib import Path
 from urllib.parse import urlencode
 from html import unescape
 from oauth2client.service_account import ServiceAccountCredentials

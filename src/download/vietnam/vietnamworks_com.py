@@ -1,4 +1,4 @@
-from imports import *
+from src.core.imports import *
 
 class VietnamworksComDownloadStrategy():
     def __init__(self, website, country, url):
@@ -154,6 +154,7 @@ class VietnamworksComDownloadStrategy():
         #logger.info("URL            : %s", category_url)
 
         results = []
+        MAX_ITEMS_PER_CATEGORY = 50
 
         try:
 
@@ -190,6 +191,14 @@ class VietnamworksComDownloadStrategy():
             total_pages = None
 
             while True:
+                # Stop before requesting another page
+                if len(results) >= MAX_ITEMS_PER_CATEGORY:
+                    logger.info(
+                        "[%s] Reached limit of %d jobs.",
+                        category_name,
+                        MAX_ITEMS_PER_CATEGORY
+                    )
+                    break
 
                 logger.info("[%s] Page %s", category_name, page)
 
@@ -230,6 +239,10 @@ class VietnamworksComDownloadStrategy():
 
                 # Save jobs
                 for job in jobs:
+
+                    # Stop once this category reaches the limit
+                    if len(results) >= MAX_ITEMS_PER_CATEGORY:
+                        break
 
                     results.append({
                         "category_name": category_name,
