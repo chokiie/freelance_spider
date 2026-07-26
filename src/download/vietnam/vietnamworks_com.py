@@ -1,330 +1,155 @@
-from core.imports import *
-from core.logger import logger
+from src.core.imports import *
+from src.core.logger import logger
+from src.download.base_download_strategy import BaseDownloadStrategy
+from src.core.config import (MAX_CATEGORY_THREADS,MAX_ITEMS_PER_CATEGORY,CATEGORY_RETRY_COUNT)
+from src.core.exceptions import (APIError,ParseError,)
+class VietnamworksComDownloadStrategy(BaseDownloadStrategy):
+    def __init__(self,website,country,url):
+        super().__init__(website,country,url)
+        self.name = "Vietnamworks"
 
-from core.config import (
-    REQUEST_TIMEOUT,
-    MAX_CATEGORY_THREADS,
-    MAX_WEBSITE_THREADS,
-    MAX_ITEMS_PER_CATEGORY
-)
-class VietnamworksComDownloadStrategy():
-    def __init__(self, website, country, url):
-            self.name = "Vietnamworks"
-            self.website = website
-            self.country = country
-            self.url = url
-            self.failed_categories = []
-            self.failed_lock = threading.Lock()
+    def fetch_api_content(self,query,page):
+        api_url = "https://ms.vietnamworks.com/job-search/v1.0/search"
+        payload = {
+            "userId": 0,"query": query,"filter": [],"ranges": [],
+            "order": [],"hitsPerPage": 50,"page": page,
+            "retrieveFields": ["address","benefits","jobTitle","salaryMax","isSalaryVisible","jobLevelVI",
+                "isShowLogo","salaryMin","companyLogo","userId","jobLevel","jobLevelId","jobId","jobUrl",
+                "companyId","approvedOn","isAnonymous","alias","expiredOn","industries","industriesV3",
+                "workingLocations","services","companyName","salary","onlineOn","onlineOnText","simpleServices",
+                "visibilityDisplay","isShowLogoInSearch","priorityOrder","skills","profilePublishedSiteMask",
+                "jobDescription","jobRequirement","prettySalary","requiredCoverLetter","languageSelectedVI",
+                "languageSelected","languageSelectedId","typeWorkingId","createdOn","isAdrLiteJob","applicantSignal",
+                "numOfApplications"
+            ],"summaryVersion": ""}
 
-    def init_headers(self):
-            # instantiate the HttpxFetcher with appropriate headers and settings
-            cookies = self.get_cookies()
-            headers = {
-                "accept": "*/*",
-                "accept-encoding": "gzip, deflate",
-                "connection": "keep-alive",
-                "cookies": "; ".join([f"{key}={value}" for key, value in cookies.items()]),
-                "user-agent": UserAgent().random,
-            }
-            return headers
-
-    def get_cookies(self):
-            try:
-                '''
-                Get cookies from the website.
-                Returns a dictionary of cookies.
-                '''
-                base_url = f"https://www.vietnamworks.com"
-                headers = {
-                    "user-agent": UserAgent().random,
-                }
-                response = requests.get(base_url,headers=headers,timeout=REQUEST_TIMEOUT)
-                return response.cookies.get_dict()
-            except Exception as e:
-                logger.error(f"Error in get_cookies: {e}")
-                return {}
-
-    def getRequester(self, url):
-
-        logger.info("Fetching Base URL: %s",url)
-
-        headers = self.init_headers()
-        response = requests.get(url,headers=headers,timeout=REQUEST_TIMEOUT)
-
-        if response.status_code != 200:
-
-            logger.warning("Failed to fetch %s, status code: %s",url,response.status_code)
-
-            return None
-
-        return response.text
-
-    def fetch_api_content(self,query,page,category_name="",category_url=""):
-            #Data in API
-            api_url = f'https://ms.vietnamworks.com/job-search/v1.0/search'
-
-            payload = {
-                "userId": 0,
-                "query": query,
-                "filter": [],
-                "ranges": [],
-                "order": [],
-                "hitsPerPage": 50,
-                "page": page,
-                "retrieveFields": ["address","benefits","jobTitle","salaryMax","isSalaryVisible","jobLevelVI","isShowLogo",
-                    "salaryMin","companyLogo","userId","jobLevel","jobLevelId","jobId","jobUrl","companyId","approvedOn",
-                    "isAnonymous","alias","expiredOn","industries","industriesV3","workingLocations","services",
-                    "companyName","salary","onlineOn","onlineOnText","simpleServices","visibilityDisplay","isShowLogoInSearch",
-                    "priorityOrder","skills","profilePublishedSiteMask","jobDescription","jobRequirement","prettySalary",
-                    "requiredCoverLetter","languageSelectedVI","languageSelected","languageSelectedId","typeWorkingId",
-                    "createdOn","isAdrLiteJob","applicantSignal","numOfApplications"],"summaryVersion": ""}
-    
-            headers = self.init_headers()
-
-            response = requests.post(api_url,json=payload, headers=headers, timeout=REQUEST_TIMEOUT)
-            if response.status_code == 200:
-                return response.json()
-
-            logger.error(
-                "[%s] HTTP %s | Page %s | URL: %s",
-                category_name,
-                response.status_code,
-                page,
-                category_url
-            )
-
-            return None
-
-    def parse_items(self, data_list):
-
+        response = self.client.post(api_url,json=payload)
         try:
+            return response.json()
+        except Exception as e:
+            raise APIError(
+                "Invalid API response."
+            ) from e
+    
+    def get_search_query(self,category_url):
+        response = self.client.get(category_url)
+        soup = BeautifulSoup(response.text,"html.parser")
+        query_tag = soup.select_one('meta[name="keywords"]')
 
-            logger.info("Starting processing with %d threads",min(len(data_list), MAX_WEBSITE_THREADS))
+        if not query_tag:
+            raise ParseError(
+                "Meta keywords not found."
+            )
+        try:
+            return query_tag["content"].split("Job search, ")[1]
 
-            with ThreadPoolExecutor(max_workers=min(len(data_list),MAX_WEBSITE_THREADS)) as executor:
+        except Exception as e:
+            raise ParseError(
+                "Unable to extract search query."
+            ) from e    
+        
+    def get_category_urls(self):
+        categories = []
+        try:
+            response = self.client.get(self.url)
+            soup = BeautifulSoup(response.text,"html.parser")
 
-                results = list(executor.map(self.get_items,data_list))
+            industry_tags = soup.select("div.boxLeft div.box h5")
+            for tag in industry_tags:
+                if tag.get_text(strip=True) != "Search Job by Industry":
+                    continue
 
-            return results
+                box_content = tag.find_next_sibling("div",class_="boxContent")
+                if not box_content:
+                    continue
+
+                for link in box_content.find_all("a", href=True):
+                    categories.append({
+                        "name": link.get_text(strip=True),
+                        "url": link["href"]})
+
+            logger.info("Found %d categories",len(categories))
+            return categories
 
         except Exception:
 
-            logger.exception("Error while processing items.")
+            logger.exception("Failed to get category URLs.")
+            return categories
 
-            return []
-            
-    def get_category_urls(self):
-        data = []  # store all Category Name and Category URLs here
-        try:
-            response = self.getRequester(self.url)
-            try:
-                _data = json.loads(response)
-            except (json.JSONDecodeError, TypeError):
-                _data = BeautifulSoup(response, "html.parser")
-
-            category_list = []
-            
-            if 'data' in _data:
-                for category in _data.get("data", []):
-                    category_list.append({
-                        "id": category.get("industry_id"),
-                        "name": category.get("industry_name_en")
-                    })
-            else:
-                industry_tags = _data.select('div.boxLeft div.box h5')
-                #Get Industry Text
-                        
-                if industry_tags:
-                    for i_tag in industry_tags:
-                        if i_tag.get_text(strip=True) == "Search Job by Industry":
-                            box_content = i_tag.find_next_sibling("div", class_="boxContent")
-            
-                            if box_content:
-                                category_tags = box_content.find_all("a")
-            
-                                if category_tags:
-                                    for category in category_tags:
-                                        if category and category.has_attr('href'):
-                                            data.append({
-                                                "name": category.get_text(strip=True),
-                                                "url": category['href']
-                                            })             
-            return data
-
-        except Exception as e:
-            logger.exception(
-                "Unexpected error in get_category_urls()"
-            )
-            return data  # return whatever URLs were collected
-
-    def get_category_product_urls(self, category):
-
+    def get_category_product_urls(self,category):
         category_name = category["name"]
         category_url = category["url"]
-
         results = []
 
         try:
-
-            # -------------------------------------------------------
-            # STEP 1: Request category page
-            # -------------------------------------------------------
-
-            response = self.getRequester(category_url)
-
-            if not response:
-                raise Exception("Category page returned empty response")
-
-            # -------------------------------------------------------
-            # STEP 2: Parse HTML
-            # -------------------------------------------------------
-
-            soup = BeautifulSoup(response, "html.parser")
-
-            query_tag = soup.select_one('meta[name="keywords"]')
-
-            if not query_tag:
-                raise Exception("Meta keywords not found")
-
-            try:
-                query = query_tag["content"].split("Job search, ")[1]
-            except Exception:
-                raise Exception("Unable to extract query")
-
-            # -------------------------------------------------------
-            # STEP 3: Pagination
-            # -------------------------------------------------------
-
-            page = 0
-            total_pages = None
+            query = self.get_search_query(category_url)
+            page = self.checkpoint.get_resume_page(category_name)
 
             while True:
-                # Stop before requesting another page
                 if len(results) >= MAX_ITEMS_PER_CATEGORY:
-                    logger.info(
-                        "[%s] Reached limit of %d jobs.",
-                        category_name,
-                        MAX_ITEMS_PER_CATEGORY
-                    )
+                    logger.info("[%s] Reached limit of %d jobs.",
+                        category_name,MAX_ITEMS_PER_CATEGORY)
                     break
 
-                logger.info("[%s] Page %s", category_name, page)
+                logger.info("[%s] Page %d",category_name,page)
 
-                api_data = self.fetch_api_content(
-                    query=query,
-                    page=page,
-                    category_name=category_name,
-                    category_url=category_url
-                )
+                api_data = self.fetch_api_content(query, page)
 
                 if api_data is None:
-                    raise Exception(f"API request failed on page {page}")
+                    raise APIError(f"API request failed ({category_name}, page {page})")
 
                 jobs = api_data.get("data", [])
 
-                if not jobs:
-                    logger.info("[%s] No more jobs.", category_name)
+                if len(jobs) == 0:
+                    logger.info("[%s] No more jobs.",category_name)
                     break
 
-                # Calculate total pages once
-                if total_pages is None:
-
-                    total_jobs = api_data.get("meta", {}).get("nbHits", 0)
-
-                    page_size = len(jobs)
-
-                    if page_size == 0:
-                        break
-
-                    total_pages = math.ceil(total_jobs / page_size)
-
-                    logger.info(
-                        "[%s] Total Jobs: %d | Total Pages: %d",
-                        category_name,
-                        total_jobs,
-                        total_pages
-                    )
-
-                # Save jobs
                 for job in jobs:
-
-                    # Stop once this category reaches the limit
                     if len(results) >= MAX_ITEMS_PER_CATEGORY:
                         break
 
                     results.append({
                         "category_name": category_name,
                         "category_url": category_url,
-                        "job_data": job
-                    })
+                        "job_data": job})
+
+                # Save progress after each page
+                self.checkpoint.update_progress(
+                    category_name,
+                    page,
+                    len(jobs)
+                )
 
                 page += 1
 
-                if page >= total_pages:
-                    break
-
-            logger.info(
-                "[%s] Finished. Collected %d jobs.",
-                category_name,
-                len(results)
-            )
+            logger.info("[%s] Finished. Collected %d jobs.",
+                category_name,len(results))
 
             return results
 
-        except Exception as e:
+        except Exception:
 
-            logger.exception(
-                "FAILED CATEGORY: %s",
-                category_name
-            )
+            logger.exception("FAILED CATEGORY: %s",category_name)
 
-            # Thread-safe append
-            with self.failed_lock:
-
-                self.failed_categories.append({
-                    "category": category_name,
-                    "url": category_url,
-                    "error": str(e)
-                })
-
-            return []
+            raise
         
-    def get_product_urls(self, category_data):
+    def get_product_urls(self,category_data):
 
         if not category_data:
             logger.warning("No categories found.")
+            return {"products": [],"failed_categories": []}
 
-            return {
-                "products": [],
-                "failed_categories": []
-            }
+        max_workers = min(len(category_data),MAX_CATEGORY_THREADS)
 
         logger.info(
             "Processing %d categories using %d threads",
-            len(category_data),
-            min(
-                len(category_data),
-                MAX_CATEGORY_THREADS
-            )
-        )
+            len(category_data),max_workers)
 
-        with ThreadPoolExecutor(
-            max_workers=min(
-                len(category_data),
-                MAX_CATEGORY_THREADS
-            )
-        ) as executor:
-
+        with ThreadPoolExecutor(max_workers=max_workers) as executor:
             results = list(
                 executor.map(
-                    self.get_category_product_urls,
-                    category_data
-                )
-            )
-
-        # ---------------------------------------
-        # Flatten all category results
-        # ---------------------------------------
+                    self.process_category,
+                    category_data))
 
         product_data = []
 
@@ -332,24 +157,90 @@ class VietnamworksComDownloadStrategy():
             product_data.extend(category_result)
 
         logger.info("SCRAPING FINISHED")
-
-        logger.info("Products Collected : %d", len(product_data))
+        logger.info("Products Collected : %d",len(product_data))
 
         if self.failed_categories:
 
-            logger.warning("FAILED CATEGORIES (%d)", len(self.failed_categories))
+            logger.warning("FAILED CATEGORIES (%d)",len(self.failed_categories))
 
             for item in self.failed_categories:
-
-                logger.warning("Category : %s", item["category"])
-                logger.warning("URL      : %s", item["url"])
-                logger.warning("Error    : %s", item["error"])
+                logger.warning("Category : %s",item["category"])
+                logger.warning("URL  : %s",item["url"])
+                logger.warning("Error    : %s",item["error"])
 
         else:
-
             logger.info("No failed categories.")
 
-        return {
-            "products": product_data,
-            "failed_categories": self.failed_categories
-        }
+        return {"products": product_data,"failed_categories": self.failed_categories}
+
+    def process_category(self,category):
+
+        category_name = category["name"]
+        category_url = category["url"]
+
+        if self.checkpoint.is_completed(
+            category_name
+        ):
+
+            logger.info(
+                "Skipping completed category: %s",
+                category_name
+            )
+
+            return []
+
+        last_error = None
+
+        for attempt in range(CATEGORY_RETRY_COUNT):
+
+            try:
+
+                if attempt > 0:
+
+                    logger.warning(
+                        "Retrying category (%d/%d): %s",
+                        attempt + 1,
+                        CATEGORY_RETRY_COUNT,
+                        category_name
+                    )
+
+                    time.sleep(2)
+
+                result = self.get_category_product_urls(
+                    category
+                )
+
+                self.checkpoint.mark_completed(
+                    category_name
+                )
+
+                return result
+
+            except Exception as e:
+
+                last_error = e
+
+                logger.exception(
+                    "Attempt %d failed for %s",
+                    attempt + 1,
+                    category_name
+                )
+
+        logger.error(
+            "Category permanently failed: %s",
+            category_name
+        )
+
+        self.add_failed_category(
+            category_name,
+            category_url,
+            last_error
+        )
+
+        self.checkpoint.mark_failed(
+            category_name,
+            category_url,
+            last_error
+        )
+
+        return []

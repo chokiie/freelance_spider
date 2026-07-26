@@ -1,0 +1,12 @@
+{
+    "website": "www.vietnamworks.com",
+    "country": "vietnam",
+    "categories": {
+        "General Human Resources": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        }
+    },
+    "failed": []
+}

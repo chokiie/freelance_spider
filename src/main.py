@@ -1,13 +1,13 @@
 from core.imports import *
 from core.logger import logger
 from core.processor import Processor
-
+from core.statistics import Statistics
 from exporter.json_exporter import JsonExporter
 
 def run(static_data):
 
     processor = Processor()
-
+    stats = Statistics()
     # --------------------------
     # Stage 1
     # --------------------------
@@ -45,6 +45,15 @@ def run(static_data):
     JsonExporter().save(
         jobs=items,
         static_data=static_data
+    )
+
+    stats.summary(
+        website=static_data["website"],
+        country=static_data["country"],
+        categories=len(category_data),
+        failed_categories=len(failed_categories),
+        products=len(product_data),
+        items=len(items),
     )
     
 if __name__ == "__main__":

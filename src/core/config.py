@@ -52,7 +52,7 @@ DATETIME_FORMAT = "%Y-%m-%d %H:%M:%S"
 REQUEST_TIMEOUT = 30
 MAX_RETRIES = 3
 RETRY_DELAY = 2
-
+CATEGORY_RETRY_COUNT = 2
 # ==========================================================
 # THREADING
 # ==========================================================
@@ -86,3 +86,9 @@ LOG_FORMAT = "%(asctime)s - %(levelname)s - %(message)s"
 # ==========================================================
 
 RANDOM_USER_AGENT = True
+
+# ==========================================================
+# CHECK POINT
+# ==========================================================
+
+CHECKPOINT_FOLDER = "checkpoint"
