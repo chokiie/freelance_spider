@@ -1,6 +1,6 @@
 from pathlib import Path
-from src.core.file_manager import FileManager
-from src.core.logger import logger
+from core.file_manager import FileManager
+from core.logger import logger
 
 class CookieManager:
     """

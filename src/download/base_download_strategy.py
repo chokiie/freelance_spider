@@ -5,8 +5,8 @@ from core.config import CATEGORY_RETRY_COUNT,MAX_CATEGORY_THREADS
 from concurrent.futures import ThreadPoolExecutor
 from bs4 import BeautifulSoup
 from core.exceptions import (APIError)
-from src.core.cookie_manager import CookieManager
-from src.core.proxy_manager import ProxyManager
+from core.cookie_manager import CookieManager
+from core.proxy_manager import ProxyManager
 import time, threading
 
 class BaseDownloadStrategy:
@@ -43,12 +43,13 @@ class BaseDownloadStrategy:
         """
         logger.debug("GET %s", url)
         cookies = self.cookies
-        proxy = self.proxy_manager.get_proxy()
+        #proxy = self.proxy_manager.get_proxy()
         self.metrics["get_requests"] += 1
         start = time.perf_counter()
         try:
             self.before_request("GET",url,**kwargs)
-            response = self.client.get(url, proxy=proxy, cookies=cookies,**kwargs)
+            #response = self.client.get(url, proxy=proxy, cookies=cookies,**kwargs)
+            response = self.client.get(url, cookies=cookies,**kwargs)
             self.after_request("GET",url,response)
             self.metrics["successful_requests"] += 1
             return response
@@ -65,12 +66,13 @@ class BaseDownloadStrategy:
         """
         logger.debug("POST %s", url)
         cookies = self.cookies
-        proxy = self.proxy_manager.get_proxy()
+        #proxy = self.proxy_manager.get_proxy()
         self.metrics["post_requests"] += 1
         start = time.perf_counter()
         try:
             self.before_request("POST",url,**kwargs)
-            response = self.client.post(url, proxy=proxy, cookies=cookies,**kwargs)
+            #response = self.client.post(url, proxy=proxy, cookies=cookies,**kwargs)
+            response = self.client.post(url, cookies=cookies,**kwargs)
             self.after_request("POST",url,response)
             self.metrics["successful_requests"] += 1
             return response

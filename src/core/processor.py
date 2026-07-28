@@ -99,5 +99,5 @@ class Processor:
         """
         if self.download_spider:
             self.download_spider.close()
-        if self.website_spider:
-            self.website_spider.close()
+        #if self.website_spider:
+            #self.website_spider.close()

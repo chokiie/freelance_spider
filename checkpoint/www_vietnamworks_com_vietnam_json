@@ -7,12 +7,17 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Civil Engineering": {
+        "General HR": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
         "General Accounting": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Civil Engineering": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -32,12 +37,12 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Production Operation & Planning": {
+        "Sales Engineer/Technical Sales": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Import/Export & Customs": {
+        "Production Operation & Planning": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -47,7 +52,7 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Sales Engineer/Technical Sales": {
+        "Import/Export & Customs": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -62,27 +67,7 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Project Management": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
-        },
         "Customer Service": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
-        },
-        "Project Development/Contracts": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
-        },
-        "Architecture Design/Architectural Drafting": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
-        },
-        "Data Engineer/Data Analyst/AI": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -92,12 +77,17 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "General HR": {
+        "Architecture Design/Architectural Drafting": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Financial Analysis & Research": {
+        "Project Development/Contracts": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Project Management": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -107,7 +97,7 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Health, Safety & Environment": {
+        "Data Engineer/Data Analyst/AI": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -117,12 +107,12 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Auto Mechanic": {
+        "Health, Safety & Environment": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Compliance & Risk": {
+        "Auto Mechanic": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -132,7 +122,7 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Recruitment": {
+        "Financial Analysis & Research": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -142,12 +132,17 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Software Developer": {
+        "Recruitment": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Freight/Cargo Forwarding": {
+        "Compliance & Risk": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Software Developer": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -162,12 +157,12 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Teaching/Training": {
+        "Warehouse & Distribution": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Warehouse & Distribution": {
+        "Teaching/Training": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -177,22 +172,7 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "IT Management": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
-        },
-        "Research & Development": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
-        },
-        "Sales Administration": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
-        },
-        "Financial Managers & Controllers": {
+        "Freight/Cargo Forwarding": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -202,17 +182,22 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "IT Product Management/Project Management": {
+        "IT Management": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Business/System Analysis": {
+        "Sales Administration": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Automotive Engineering": {
+        "Research & Development": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Financial Managers & Controllers": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -222,12 +207,17 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Training and Development": {
+        "Business/System Analysis": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Industrial Design/Technical Design": {
+        "IT Product Management/Project Management": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Automotive Engineering": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -237,7 +227,17 @@
             "last_completed_page": 0,
             "items": 50
         },
+        "Industrial Design/Technical Design": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
         "Merchandising": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Training and Development": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -252,6 +252,11 @@
             "last_completed_page": 0,
             "items": 50
         },
+        "Purchasing": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
         "Audit": {
             "status": "completed",
             "last_completed_page": 0,
@@ -262,17 +267,22 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Purchasing": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
-        },
         "Graphic Design": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
+        "Content Marketing/Copywriter": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
         "Investment": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Secretary": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -287,12 +297,12 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Secretary": {
+        "Interpreter/Translator": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Interpreter/Translator": {
+        "General Management": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -302,22 +312,7 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Content Marketing/Copywriter": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 44
-        },
         "Interior Design": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
-        },
-        "QA/QC/Software Testing": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 41
-        },
-        "Chemical Engineering": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -325,14 +320,19 @@
         "Educational Consulting": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 44
+            "items": 45
         },
-        "Clothing Technology": {
+        "QA/QC/Software Testing": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 39
+            "items": 43
         },
-        "General Management": {
+        "Chemical Engineering": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Credit": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -340,47 +340,42 @@
         "Educational Management": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 37
+            "items": 38
         },
-        "Credit": {
+        "Clothing Technology": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 50
-        },
-        "Commercial Sales, Leasing & Property Management": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 37
+            "items": 39
         },
         "Student Services": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 37
-        },
-        "Digital Transformation": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 42
-        },
-        "Security": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
+            "items": 38
         },
         "Trade Marketing": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Machine Operator": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 44
-        },
         "Area/Multisite Management": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 35
+        },
+        "Security": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Digital Transformation": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 42
+        },
+        "Commercial Sales, Leasing & Property Management": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 37
         },
         "Others": {
             "status": "completed",
@@ -392,80 +387,100 @@
             "last_completed_page": 0,
             "items": 34
         },
+        "Machine Operator": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 43
+        },
         "Legal Practice Management": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 33
+            "items": 34
         },
         "Accounts Receivable": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 38
-        },
-        "F&B Management": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
+            "items": 41
         },
         "Video Editing": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 45
         },
+        "F&B Management": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Product Marketing": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 47
+        },
+        "Facilities Management": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 33
+        },
         "CNC Technician": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 29
         },
-        "Product Marketing": {
+        "Cost Accounting": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 46
+            "items": 43
         },
         "Stockbroking & Trading": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 27
         },
-        "Cost Accounting": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 41
-        },
         "Agency Account Management": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 27
         },
-        "Facilities Management": {
+        "Public Relations & Corporate Affairs": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 30
+            "items": 25
         },
         "Urban Design & Planning": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 24
+            "items": 26
         },
         "Power/Water/Waste Engineering": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 24
         },
-        "Public Relations & Corporate Affairs": {
+        "Retail Assistant": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 24
+            "items": 25
         },
         "Database Administration": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 45
+            "items": 48
         },
-        "Retail Assistant": {
+        "Construction Law": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 24
+            "items": 39
+        },
+        "Market Research & Analysis": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 21
+        },
+        "Corporate Planning/Corporate Advisory": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 21
         },
         "Event Management": {
             "status": "completed",
@@ -477,22 +492,22 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Corporate Planning/Corporate Advisory": {
+        "Production Analysis": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 21
-        },
-        "Construction Law": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 38
-        },
-        "Market Research & Analysis": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 21
+            "items": 22
         },
         "Food Technology": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
+        },
+        "Store Management": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 35
+        },
+        "UX/UI Design": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
@@ -502,52 +517,37 @@
             "last_completed_page": 0,
             "items": 50
         },
-        "Store Management": {
+        "Performance & Career Management": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 34
+            "items": 17
         },
-        "Production Analysis": {
+        "Biotechnologies": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 22
-        },
-        "UX/UI Design": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
-        },
-        "Telecommunications": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 50
+            "items": 16
         },
         "Debt Collection": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 19
         },
-        "Tour Operator": {
+        "Employment/Retirement Law": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 17
+            "items": 16
         },
-        "Performance & Career Management": {
+        "Telecommunications": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 17
+            "items": 50
         },
         "Receptionist": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 35
+            "items": 36
         },
-        "Biotechnologies": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 15
-        },
-        "Employment/Retirement Law": {
+        "Tour Operator": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 16
@@ -557,35 +557,35 @@
             "last_completed_page": 0,
             "items": 14
         },
-        "Telesales": {
+        "Buying": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 33
+            "items": 50
         },
         "Chefs/Cooks": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 14
         },
-        "Hardware Developer": {
+        "Telesales": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 13
-        },
-        "Aviation Services": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 13
+            "items": 33
         },
         "Customer Service - Call Center": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 14
         },
-        "Buying": {
+        "Aviation Services": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 50
+            "items": 13
+        },
+        "Hardware Developer": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 13
         },
         "Real Estate Analysis": {
             "status": "completed",
@@ -597,7 +597,7 @@
             "last_completed_page": 0,
             "items": 12
         },
-        "Residential Leasing & Property Management": {
+        "Law Clerks & Paralegals": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 12
@@ -607,12 +607,12 @@
             "last_completed_page": 0,
             "items": 13
         },
-        "Research and Fellowship": {
+        "Residential Leasing & Property Management": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 11
+            "items": 12
         },
-        "Law Clerks & Paralegals": {
+        "Research and Fellowship": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 11
@@ -622,35 +622,30 @@
             "last_completed_page": 0,
             "items": 11
         },
-        "Customer Service - Customer Facing": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 9
-        },
         "Road Transport": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 9
         },
-        "Mining/Oil/Gas": {
+        "Customer Service - Customer Facing": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 50
-        },
-        "Claims": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 36
+            "items": 9
         },
         "Medical Technologist": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 11
         },
-        "Travel Agents": {
+        "Claims": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 8
+            "items": 36
+        },
+        "Mining/Oil/Gas": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 50
         },
         "Office Management": {
             "status": "completed",
@@ -670,9 +665,14 @@
         "Funds Management": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 43
+            "items": 45
         },
-        "Doctor/General Practitioners/Residents": {
+        "Legal Secretaries": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 7
+        },
+        "Travel Agents": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 7
@@ -682,17 +682,32 @@
             "last_completed_page": 0,
             "items": 7
         },
-        "Legal Secretaries": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 6
-        },
         "Policy, Planning & Regulation": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 6
         },
+        "Doctor/General Practitioners/Residents": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 7
+        },
         "Rail & Maritime Transport": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 5
+        },
+        "Intellectual/Property Law": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 5
+        },
+        "Front Office & Guest Services": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 5
+        },
+        "Programming & Production": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 5
@@ -702,22 +717,22 @@
             "last_completed_page": 0,
             "items": 15
         },
-        "Front Office & Guest Services": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 5
-        },
         "CEO": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 50
         },
-        "Printing Technician": {
+        "Public Transport & Taxi Services": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 6
+            "items": 4
         },
-        "Public Transport & Taxi Services": {
+        "Underwriting": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 8
+        },
+        "NGO/Non-Profit": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 4
@@ -727,32 +742,12 @@
             "last_completed_page": 0,
             "items": 10
         },
-        "Intellectual/Property Law": {
+        "Printing Technician": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 5
-        },
-        "Underwriting": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 8
+            "items": 6
         },
         "Risk Consulting": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 3
-        },
-        "Programming & Production": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 3
-        },
-        "NGO/Non-Profit": {
-            "status": "completed",
-            "last_completed_page": 0,
-            "items": 3
-        },
-        "Art Direction/Photography": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 3
@@ -762,20 +757,20 @@
             "last_completed_page": 0,
             "items": 2
         },
-        "Tax Law": {
+        "Art Direction/Photography": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 47
+            "items": 3
         },
         "Nursing": {
             "status": "completed",
             "last_completed_page": 0,
             "items": 2
         },
-        "Hotel Reservation": {
+        "Tax Law": {
             "status": "completed",
             "last_completed_page": 0,
-            "items": 1
+            "items": 49
         },
         "Psychology, Counselling & Social Work": {
             "status": "completed",
@@ -786,6 +781,11 @@
             "status": "completed",
             "last_completed_page": 0,
             "items": 2
+        },
+        "Hotel Reservation": {
+            "status": "completed",
+            "last_completed_page": 0,
+            "items": 1
         }
     },
     "failed": [
