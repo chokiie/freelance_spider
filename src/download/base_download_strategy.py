@@ -113,22 +113,16 @@ class BaseDownloadStrategy:
     ##################################################
 
     def add_failed_category(self,category,url,error):
-
         with self.failed_lock:
             self.failed_categories.append({"category": category,"url": url,"error": str(error)})
 
     def process_category(self, category):
-
         category_name = category["name"]
         category_url = category["url"]
-
         if self.checkpoint.is_completed(category_name):
             logger.info("Skipping completed category: %s",category_name)
-
             return []
-
         last_error = None
-
         for attempt in range(CATEGORY_RETRY_COUNT):
             try:
                 if attempt > 0:
@@ -136,53 +130,37 @@ class BaseDownloadStrategy:
                         "Retrying category (%d/%d): %s",
                         attempt + 1,CATEGORY_RETRY_COUNT,category_name,)
                     time.sleep(2)
-
                 result = self.get_category_product_urls(category)
                 self.checkpoint.mark_completed(category_name)
-
                 return result
-
             except Exception as e:
-
                 last_error = e
-
                 logger.exception("Attempt %d failed for %s",attempt + 1,category_name,)
-
         logger.error("Category permanently failed: %s",category_name,)
-
         self.add_failed_category(category_name,category_url,last_error)
         self.checkpoint.mark_failed(category_name,category_url,last_error)
-
         return []
 
     def collect_results(self, results):
         """
         Combine all thread results into one list.
         """
-
         product_data = []
-
         for category_result in results:
             product_data.extend(category_result)
-
         return product_data
 
     def get_product_urls(self,category_data):
         if not category_data:
             logger.warning("No categories found.")
-
             return {"products": [],"failed_categories": []}
-
         max_workers = min(len(category_data),MAX_CATEGORY_THREADS)
         logger.info("Processing %d categories using %d threads",len(category_data),max_workers)
-    
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             results = list(executor.map(self.process_category,category_data))
-
         product_data = self.collect_results(results)
         self.log_summary(product_data)
         self.log_failed_categories()
-
         return {"products": product_data,"failed_categories": self.failed_categories}
 
     def get_category_urls(self):
@@ -190,30 +168,21 @@ class BaseDownloadStrategy:
         Return all categories for the website.
         Must be implemented by child classes.
         """
-        raise NotImplementedError(
-            "Child class must implement get_category_urls()."
-        )
+        raise NotImplementedError("Child class must implement get_category_urls().")
 
     def get_category_product_urls(self, category):
         """
         Download all products/jobs for a category.
         Must be implemented by child classes.
         """
-        raise NotImplementedError(
-            "Child class must implement get_category_product_urls()."
-        )
+        raise NotImplementedError("Child class must implement get_category_product_urls().")
 
     def log_summary(self, product_data):
         """
         Log scraping summary.
         """
-
         logger.info("SCRAPING FINISHED")
-
-        logger.info(
-            "Products Collected : %d",
-            len(product_data)
-        )
+        logger.info("Products Collected : %d",len(product_data))
 
     def log_failed_categories(self):
         """

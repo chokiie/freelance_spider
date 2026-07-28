@@ -2,7 +2,6 @@ from pathlib import Path
 from src.core.file_manager import FileManager
 from src.core.logger import logger
 
-
 class CookieManager:
     """
     Handles persistent cookies for download strategies.
@@ -26,7 +25,6 @@ class CookieManager:
         if not self.exists():
             logger.info("No cookie file found.")
             return {}
-
         return self.file_manager.load_json(self.cookie_path)
 
     def save(self,cookies):
