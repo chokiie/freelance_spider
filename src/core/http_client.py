@@ -1,21 +1,9 @@
 import time
 import requests
-
 from fake_useragent import UserAgent
-
-from tenacity import (
-    retry,
-    stop_after_attempt,
-    wait_fixed,
-    retry_if_exception,
-)
-
-from src.core.logger import logger
-from src.core.config import (
-    REQUEST_TIMEOUT,
-    MAX_RETRIES,
-    RETRY_DELAY
-)
+from tenacity import (retry,stop_after_attempt,wait_fixed,retry_if_exception,)
+from core.logger import logger
+from core.config import (REQUEST_TIMEOUT,MAX_RETRIES,RETRY_DELAY)
 
 
 ##################################################

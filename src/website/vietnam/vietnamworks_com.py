@@ -1,6 +1,6 @@
-from src.core.imports import *
-from src.core.logger import logger
-from src.core.config import (
+from core.imports import *
+from core.logger import logger
+from core.config import (
     REQUEST_TIMEOUT,
     MAX_CATEGORY_THREADS,
     MAX_WEBSITE_THREADS,

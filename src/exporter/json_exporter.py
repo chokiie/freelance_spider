@@ -1,7 +1,6 @@
-from src.core.imports import *
-
-from src.core.logger import logger
-from src.core.config import (
+from core.imports import *
+from core.logger import logger
+from core.config import (
     OUTPUT_FOLDER,
     JSON_INDENT,
     JSON_ENSURE_ASCII,
@@ -9,8 +8,6 @@ from src.core.config import (
     DEFAULT_ENCODING,
     DATE_FORMAT
 )
-
-
 class JsonExporter:
 
     def save(self, jobs, static_data):

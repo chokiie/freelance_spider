@@ -1,9 +1,5 @@
 import logging
-
-from src.core.config import (
-    LOG_LEVEL,
-    LOG_FORMAT
-)
+from core.config import (LOG_LEVEL,LOG_FORMAT)
 
 def setup_logger():
 

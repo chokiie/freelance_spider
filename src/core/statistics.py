@@ -1,6 +1,5 @@
-from src.core.imports import *
-from src.core.logger import logger
-
+from core.imports import *
+from core.logger import logger
 
 class Statistics:
 

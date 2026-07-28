@@ -1,7 +1,6 @@
 import json
 from pathlib import Path
-from src.core.logger import logger
-
+from core.logger import logger
 
 class FileManager:
     """

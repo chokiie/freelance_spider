@@ -1,8 +1,7 @@
 from pathlib import Path
 import threading
-
-from src.core.logger import logger
-from src.core.file_manager import FileManager
+from core.logger import logger
+from core.file_manager import FileManager
 
 
 class Checkpoint:
